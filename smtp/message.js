@@ -85,7 +85,11 @@ var Message = function(headers)
       else if(/^(cc|bcc|to|from)/i.test(header))
       {
          this.header[header.toLowerCase()] = person2address(headers[header]);
-      }
+	  }
+	  else if(header == 'type')
+	  {
+		  this.contentType = headers[header];
+	  }
       else
       {
          // allow any headers the user wants to set??
@@ -237,7 +241,7 @@ var MessageStream = function(message)
    var output_mixed = function()
    {
       var boundary   = generate_boundary();
-      var data       = ["Content-Type: multipart/mixed; boundary=\"", boundary, "\"", CRLF, CRLF, "--", boundary, CRLF];
+      var data       = ["Content-Type: ", this.contentType || "multipart/mixed", "; boundary=\"", boundary, "\"", CRLF, CRLF, "--", boundary, CRLF];
 
       output(data.join(''));
 
