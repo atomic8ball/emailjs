@@ -241,7 +241,7 @@ var MessageStream = function(message)
    var output_mixed = function()
    {
       var boundary   = generate_boundary();
-      var data       = ["Content-Type: ", this.contentType || "multipart/mixed", "; boundary=\"", boundary, "\"", CRLF, CRLF, "--", boundary, CRLF];
+      var data       = ["Content-Type: ", self.contentType || "multipart/mixed", "; boundary=\"", boundary, "\"", CRLF, CRLF, "--", boundary, CRLF];
 
       output(data.join(''));
 
